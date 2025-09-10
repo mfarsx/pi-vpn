@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  pi-vpn:
+    build: .
+    container_name: pi-vpn-server
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes:
+      - ./config:/app/config
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - /etc/wireguard:/etc/wireguard
+      - /lib/modules:/lib/modules:ro
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - CLIENT_PORT=3000
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+      - "51820:51820/udp"
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a reverse proxy for HTTPS
+  nginx:
+    image: nginx:alpine
+    container_name: pi-vpn-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - pi-vpn
+    profiles:
+      - with-nginx
+
+networks:
+  default:
+    driver: bridge

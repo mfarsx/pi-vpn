@@ -149,3 +149,7 @@ __tests__/
 # Documentation build
 docs/_build/
 site/
+
+# Docker files
+docker-compose.override.yml
+.dockerignore
