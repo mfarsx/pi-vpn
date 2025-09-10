@@ -1,0 +1,56 @@
+{
+  "networkName": "Pi VPN Network",
+  "subnet": "10.0.0.0/24",
+  "gateway": "10.0.0.1",
+  "dhcpEnabled": true,
+  "dhcpRange": "10.0.0.100-10.0.0.200",
+  "dnsServers": [
+    "8.8.8.8",
+    "1.1.1.1",
+    "10.0.0.1"
+  ],
+  "portForwarding": [],
+  "firewallRules": [
+    {
+      "name": "Allow VPN Traffic",
+      "action": "ACCEPT",
+      "protocol": "UDP",
+      "port": 51820,
+      "source": "any",
+      "destination": "any"
+    },
+    {
+      "name": "Allow SSH",
+      "action": "ACCEPT",
+      "protocol": "TCP",
+      "port": 22,
+      "source": "any",
+      "destination": "any"
+    },
+    {
+      "name": "Allow HTTP",
+      "action": "ACCEPT",
+      "protocol": "TCP",
+      "port": 80,
+      "source": "any",
+      "destination": "any"
+    },
+    {
+      "name": "Allow HTTPS",
+      "action": "ACCEPT",
+      "protocol": "TCP",
+      "port": 443,
+      "source": "any",
+      "destination": "any"
+    }
+  ],
+  "bandwidthLimits": {
+    "enabled": false,
+    "downloadLimit": "100Mbps",
+    "uploadLimit": "50Mbps"
+  },
+  "qosEnabled": false,
+  "qosRules": [],
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "lastModified": "2024-01-01T00:00:00.000Z"
+}

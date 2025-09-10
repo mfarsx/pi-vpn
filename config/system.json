@@ -1,0 +1,32 @@
+{
+  "hostname": "pi-vpn-server",
+  "timezone": "UTC",
+  "language": "en",
+  "autoUpdate": true,
+  "updateSchedule": "0 2 * * 0",
+  "backupEnabled": true,
+  "backupSchedule": "0 1 * * *",
+  "backupRetention": 7,
+  "logRetention": 30,
+  "performanceMonitoring": true,
+  "resourceLimits": {
+    "maxMemory": "512MB",
+    "maxCPU": "80%",
+    "maxDisk": "1GB"
+  },
+  "security": {
+    "firewallEnabled": true,
+    "sshEnabled": true,
+    "sshPort": 22,
+    "fail2banEnabled": true,
+    "autoSecurityUpdates": true
+  },
+  "network": {
+    "interface": "eth0",
+    "staticIP": true,
+    "gateway": "192.168.1.1",
+    "subnet": "192.168.1.0/24"
+  },
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "lastModified": "2024-01-01T00:00:00.000Z"
+}

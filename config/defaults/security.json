@@ -1,0 +1,75 @@
+{
+  "encryption": {
+    "algorithm": "ChaCha20Poly1305",
+    "keySize": 256,
+    "handshakeTimeout": 180
+  },
+  "authentication": {
+    "method": "psk",
+    "pskRotation": false,
+    "pskRotationInterval": 30
+  },
+  "accessControl": {
+    "allowedCountries": [],
+    "blockedCountries": [],
+    "allowedIPs": [],
+    "blockedIPs": [],
+    "timeRestrictions": {
+      "enabled": false,
+      "allowedHours": "00:00-23:59",
+      "allowedDays": "monday,tuesday,wednesday,thursday,friday,saturday,sunday"
+    }
+  },
+  "monitoring": {
+    "logConnections": true,
+    "logDisconnections": true,
+    "logTraffic": true,
+    "alertOnSuspiciousActivity": true,
+    "maxConnectionsPerIP": 5,
+    "connectionTimeout": 300
+  },
+  "firewall": {
+    "enabled": true,
+    "defaultPolicy": "DROP",
+    "rules": [
+      {
+        "name": "Allow Established Connections",
+        "action": "ACCEPT",
+        "protocol": "all",
+        "state": "ESTABLISHED,RELATED"
+      },
+      {
+        "name": "Allow Loopback",
+        "action": "ACCEPT",
+        "interface": "lo"
+      },
+      {
+        "name": "Allow VPN Interface",
+        "action": "ACCEPT",
+        "interface": "wg0"
+      }
+    ]
+  },
+  "intrusionDetection": {
+    "enabled": true,
+    "fail2ban": {
+      "enabled": true,
+      "maxRetry": 3,
+      "banTime": 3600,
+      "findTime": 600
+    },
+    "rateLimiting": {
+      "enabled": true,
+      "requestsPerMinute": 60,
+      "burstSize": 10
+    }
+  },
+  "certificates": {
+    "sslEnabled": true,
+    "certPath": "/etc/ssl/certs/pi-vpn.crt",
+    "keyPath": "/etc/ssl/private/pi-vpn.key",
+    "autoRenew": true
+  },
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "lastModified": "2024-01-01T00:00:00.000Z"
+}
