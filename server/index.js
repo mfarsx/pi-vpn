@@ -84,7 +84,7 @@ app.set('vpnManager', vpnManager);
 app.set('deviceManager', deviceManager);
 app.set('io', io);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   logger.info(`Pi VPN Server running on port ${PORT}`);

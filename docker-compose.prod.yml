@@ -15,8 +15,7 @@ services:
       - /lib/modules:/lib/modules:ro
     environment:
       - NODE_ENV=production
-      - PORT=3001
-      - CLIENT_PORT=3000
+      - PORT=3000
       - JWT_SECRET=${JWT_SECRET}
       - VPN_INTERFACE=wg0
       - VPN_PORT=51820
@@ -26,7 +25,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
