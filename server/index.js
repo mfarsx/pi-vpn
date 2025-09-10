@@ -4,6 +4,7 @@ const socketIo = require('socket.io');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -44,9 +45,17 @@ app.use('/api/vpn', authenticateToken, vpnRoutes);
 app.use('/api/devices', authenticateToken, deviceRoutes);
 app.use('/api/config', authenticateToken, configRoutes);
 
+// Serve static files from client/public
+app.use(express.static(path.join(__dirname, '../client/public')));
+
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Serve the main application for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 // Error handling
