@@ -28,8 +28,8 @@ COPY . .
 RUN mkdir -p logs data config/clients
 
 # Create non-root user
-RUN addgroup -g 1000 pi && \
-    adduser -D -s /bin/bash -u 1000 -G pi pi && \
+RUN addgroup pi && \
+    adduser -D -s /bin/bash -G pi pi && \
     echo 'pi ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Set ownership
