@@ -4,7 +4,7 @@ const fs = require('fs').promises;
 const logger = require('../server/utils/logger');
 
 const app = express();
-const PORT = process.env.CLIENT_PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));

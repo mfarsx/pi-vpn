@@ -1,0 +1,24 @@
+{
+  "name": "pi-vpn",
+  "domain": "pi-vpn.mfarsx.dev",
+  "repository": "https://github.com/mfarsx/pi-vpn.git",
+  "branch": "main",
+  "buildCommand": "npm ci --only=production",
+  "startCommand": "npm start",
+  "port": 3000,
+  "environment": {
+    "NODE_ENV": "production",
+    "PORT": "3000",
+    "CLIENT_URL": "https://pi-vpn.mfarsx.dev",
+    "JWT_SECRET": "pi-vpn-jwt-secret-key-2024-production-mfarsx-dev-secure",
+    "VPN_INTERFACE": "wg0",
+    "VPN_PORT": "51820",
+    "VPN_NETWORK": "10.0.0.0/24",
+    "VPN_SERVER_IP": "10.0.0.1",
+    "ENABLE_HTTPS": "true",
+    "LOG_LEVEL": "info",
+    "MONITORING_ENABLED": "true",
+    "EXTERNAL_DNS": "8.8.8.8,1.1.1.1",
+    "EXTERNAL_NTP": "pool.ntp.org"
+  }
+}

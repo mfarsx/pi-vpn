@@ -1,7 +1,7 @@
-# Pi VPN Dockerfile
+# Pi VPN Dockerfile for Raspberry Pi Hosting Platform
 FROM node:18-alpine
 
-# Install system dependencies
+# Install system dependencies for VPN functionality
 RUN apk add --no-cache \
     wireguard-tools \
     iptables \
@@ -38,12 +38,12 @@ RUN chown -R pi:pi /app
 # Switch to non-root user
 USER pi
 
-# Expose ports
-EXPOSE 3000 3001 51820/udp
+# Expose ports (main app port + VPN port for WireGuard)
+EXPOSE ${PORT:-3000} ${VPN_PORT:-51820}/udp
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:3001/health || exit 1
+    CMD curl -f http://localhost:${PORT:-3000}/health || exit 1
 
 # Default command
 CMD ["npm", "start"]

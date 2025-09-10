@@ -1,0 +1,49 @@
+{
+  "project": {
+    "name": "pi-vpn",
+    "description": "Pi VPN - Home WiFi VPN Solution",
+    "version": "1.0.0",
+    "repository": "https://github.com/mfarsx/pi-vpn.git",
+    "branch": "main"
+  },
+  "deployment": {
+    "domain": "pi-vpn.mfarsx.dev",
+    "port": 3000,
+    "environment": "production",
+    "dockerfile": "Dockerfile",
+    "env_file": ".env.production"
+  },
+  "environment_variables": {
+    "NODE_ENV": "production",
+    "PORT": "3000",
+    "CLIENT_URL": "https://pi-vpn.mfarsx.dev",
+    "JWT_SECRET": "pi-vpn-jwt-secret-key-2024-production-mfarsx-dev-secure",
+    "VPN_INTERFACE": "wg0",
+    "VPN_PORT": "51820",
+    "VPN_NETWORK": "10.0.0.0/24",
+    "VPN_SERVER_IP": "10.0.0.1",
+    "ENABLE_HTTPS": "true",
+    "LOG_LEVEL": "info",
+    "MONITORING_ENABLED": "true",
+    "EXTERNAL_DNS": "8.8.8.8,1.1.1.1",
+    "EXTERNAL_NTP": "pool.ntp.org"
+  },
+  "volumes": {
+    "config": "/app/config",
+    "logs": "/app/logs",
+    "data": "/app/data"
+  },
+  "ports": {
+    "web": 3000,
+    "vpn": 51820
+  },
+  "health_check": {
+    "path": "/health",
+    "interval": 30,
+    "timeout": 3,
+    "retries": 3
+  },
+  "restart_policy": "unless-stopped",
+  "privileged": true,
+  "cap_add": ["NET_ADMIN", "SYS_MODULE"]
+}
