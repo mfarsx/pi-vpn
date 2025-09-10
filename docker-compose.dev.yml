@@ -6,11 +6,13 @@ services:
     container_name: pi-vpn-dev
     restart: unless-stopped
     privileged: true
-    network_mode: host
     volumes:
       - .:/app
       - /etc/wireguard:/etc/wireguard
       - /lib/modules:/lib/modules:ro
+    ports:
+      - "3000:3000"
+      - "51820:51820/udp"
     environment:
       - NODE_ENV=development
       - PORT=3000
